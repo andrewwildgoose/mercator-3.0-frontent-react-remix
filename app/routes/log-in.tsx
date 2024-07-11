@@ -1,6 +1,7 @@
 import { MetaFunction } from "@remix-run/node";
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 import LoginForm from "~/components/LoginForm";
+import LoginFormAnim from "~/components/LoginFormAnim";
 
 export const meta: MetaFunction = () => {
     return [
@@ -17,7 +18,8 @@ export default function Login() {
                 <Links />
             </head>
             <body>
-                <LoginForm />
+                {/* <LoginForm /> */}
+                <LoginFormAnim />
                 <ScrollRestoration />
                 <Scripts />
             </body>
