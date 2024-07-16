@@ -17,6 +17,6 @@ export default function Logo() {
     };
 
     return (
-        <h1 className="text-4xl text-custom-text mb-8">{renderColoredText("mercator")}</h1>
+        <h1 className="text-4xl text-custom-text">{renderColoredText("merkator")}</h1>
     )
 }

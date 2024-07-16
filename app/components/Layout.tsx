@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <body>
             {children}
-            <Outlet />  {/* This will render the child routes like login or register */}
+            <Outlet />
             <ScrollRestoration />
             <Scripts />
         </body>

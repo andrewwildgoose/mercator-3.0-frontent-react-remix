@@ -10,13 +10,12 @@ import {
 } from "@remix-run/react";
 
 import Logo from "~/components/Logo";
-import LoginForm from "~/components/LoginForm";
-import RegisterForm from "~/components/RegisterForm";
+import Auth from "~/components/Auth";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "mercator" },
-    { name: "description", content: "Welcome to mercator" },
+    { title: "merkator" },
+    { name: "description", content: "Welcome to merkator" },
   ];
 };
 
@@ -24,14 +23,9 @@ export default function Index() {
 
 
   return (
-    <div className="font-light font-sans p-4 h-screen flex gap-20 flex-col justify-center items-center">
+    <div className="font-light font-sans p-4 h-full flex gap-20 flex-col justify-top items-center mt-16">
       <Logo />
-      <nav className="flex gap-2">
-        <ul className="flex gap-16 flex flex-col justify-center items-center">
-          <LoginForm />
-          <RegisterForm />
-        </ul>
-      </nav>
+      <Auth />
     </div>
   );
 }

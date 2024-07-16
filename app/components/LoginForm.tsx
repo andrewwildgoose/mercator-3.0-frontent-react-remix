@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "@remix-run/react";
 
-export default function LoginForm() {
+export default function LoginForm({ isExpanded, onExpand }: { isExpanded: boolean; onExpand: () => void }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isExpanded, setIsExpanded] = useState(false); // State to track form expansion
     const navigate = useNavigate();
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -37,13 +36,13 @@ export default function LoginForm() {
         <div className="group relative flex flex-col justify-end items-center h-24 w-60 hover:cursor-pointer">
             <h2 
                 className="text-2xl text-custom-text transition-transform duration-300 transform hover:-translate-y-1"
-                onClick={() => setIsExpanded(!isExpanded)}
+                onClick={onExpand}
                 >LOG IN
             </h2>
             <form onSubmit={handleSubmit}>
                 <span className="absolute bottom-0 left-0 right-0 h-1">
                     <span className={`absolute w-full h-0.5 top-1 bg-opacity-50 bg-merc-blue group-hover:bg-opacity-100 transition-all duration-500 ease-in-out ${
-                        isExpanded ? "h-20 top-4 bg-transparent" : "h-0.5 top-1 bg-merc-blue"
+                        isExpanded ? "h-20 top-4 bg-transparent" : "h-0.5 top-px bg-merc-blue"
                     } overflow-hidden`}>
                         <div className="mb-4 bg-black border-2 border-merc-blue">
                             <label htmlFor="email" className="block px-1 py-1 text-1xl text-custom-text">
@@ -59,8 +58,8 @@ export default function LoginForm() {
                             />
                         </div>
                     </span>
-                    <span className={`absolute w-full h-0.5 top-2 bg-opacity-100 bg-merc-yellow transition-all duration-500 ease-in-out ${
-                        isExpanded ? "h-20 top-24 bg-transparent" : "h-0.5 top-2 bg-merc-yellow"
+                    <span className={`absolute w-full h-0.5 mb-px bg-opacity-100 bg-merc-yellow transition-all duration-500 ease-in-out ${
+                        isExpanded ? "h-20 top-24 bg-transparent" : "h-0.5 top-1 bg-merc-yellow"
                     } overflow-hidden`}>
                         <div className="mb-4 bg-black border-2 border-merc-yellow">
                             <label htmlFor="password" className="block px-1 py-1 text-1xl text-custom-text">
@@ -77,7 +76,7 @@ export default function LoginForm() {
                         </div>
                     </span>
                     <span className={`absolute w-full h-0.5 top-3 bg-opacity-100 bg-merc-green transition-all duration-500 ease-in-out ${
-                        isExpanded ? "h-12 top-48 bg-transparent" : "h-0.5 top-3 bg-merc-green"
+                        isExpanded ? "h-12 top-44 bg-transparent" : "h-0.5 top-[7px] bg-merc-green"
                     } overflow-hidden`}>
                         <div className={`h-0 mb-4 bg-transparent border-2 border-merc-green transition-all duration-500 ease-in-out ${
                         isExpanded ? "h-12" : "h-0"
