@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "@remix-run/react";
+import axios from 'axios';
 
 export default function LoginForm({ isExpanded, onExpand }: { isExpanded: boolean; onExpand: () => void }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const formData = {
@@ -14,22 +16,35 @@ export default function LoginForm({ isExpanded, onExpand }: { isExpanded: boolea
             password: password,
         };
 
-        const response = await fetch("http://127.0.0.1:5000/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
+        try {
+            const response = await axios.post("http://127.0.0.1:5000/login", formData, {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
 
-        if (!response.ok) {
-            console.error("Error submitting form:", response.statusText);
-            // Handle error if needed
-            return;
+            if (response.status === 200) {
+                // Successful login
+                console.log('Login successful');
+                console.log('Login successful:', response.data);
+                navigate("/dashboard"); // Navigate to dashboard or another page
+            } else {
+                // Handle unexpected status codes
+                console.error('Unexpected response status:', response.status);
+                setError('Login failed');
+            }
+        } catch (error) {
+            // Handle errors
+            if (error.response) {
+                // Server responded with an error status code
+                setError(error.response.data.message || 'Login failed');
+            } else {
+                // Network or other errors
+                setError('Could not establish a connection to the server!');
+            }
+            console.error("Error submitting form:", error);
         }
-
-        // Handle success (optional)
-        navigate("/dashboard"); // Navigate to dashboard or any other page on successful login
     }
 
     return (
